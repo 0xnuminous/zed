@@ -102,6 +102,7 @@ members = [
     "crates/ollama",
     "crates/open_ai",
     "crates/open_router",
+    "crates/venice",
     "crates/outline",
     "crates/outline_panel",
     "crates/panel",
@@ -311,6 +312,7 @@ notifications = { path = "crates/notifications" }
 ollama = { path = "crates/ollama" }
 open_ai = { path = "crates/open_ai" }
 open_router = { path = "crates/open_router", features = ["schemars"] }
+venice = { path = "crates/venice", features = ["schemars"] }
 outline = { path = "crates/outline" }
 outline_panel = { path = "crates/outline_panel" }
 panel = { path = "crates/panel" }

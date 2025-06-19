@@ -20,6 +20,7 @@ use crate::provider::{
     ollama::OllamaSettings,
     open_ai::OpenAiSettings,
     open_router::OpenRouterSettings,
+    venice::VeniceSettings,
 };
 
 /// Initializes the language model settings.
@@ -62,6 +63,7 @@ pub struct AllLanguageModelSettings {
     pub ollama: OllamaSettings,
     pub openai: OpenAiSettings,
     pub open_router: OpenRouterSettings,
+    pub venice: VeniceSettings,
     pub zed_dot_dev: ZedDotDevSettings,
     pub google: GoogleSettings,
 
@@ -78,6 +80,7 @@ pub struct AllLanguageModelSettingsContent {
     pub lmstudio: Option<LmStudioSettingsContent>,
     pub openai: Option<OpenAiSettingsContent>,
     pub open_router: Option<OpenRouterSettingsContent>,
+    pub venice: Option<VeniceSettingsContent>,
     #[serde(rename = "zed.dev")]
     pub zed_dot_dev: Option<ZedDotDevSettingsContent>,
     pub google: Option<GoogleSettingsContent>,
@@ -276,6 +279,12 @@ pub struct OpenRouterSettingsContent {
     pub available_models: Option<Vec<provider::open_router::AvailableModel>>,
 }
 
+#[derive(Default, Clone, Debug, Serialize, Deserialize, PartialEq, JsonSchema)]
+pub struct VeniceSettingsContent {
+    pub api_url: Option<String>,
+    pub available_models: Option<Vec<provider::venice::AvailableModel>>,
+}
+
 impl settings::Settings for AllLanguageModelSettings {
     const KEY: Option<&'static str> = Some("language_models");
 
@@ -426,6 +435,17 @@ impl settings::Settings for AllLanguageModelSettings {
                 open_router
                     .as_ref()
                     .and_then(|s| s.available_models.clone()),
+            );
+
+            // Venice
+            let venice = value.venice.clone();
+            merge(
+                &mut settings.venice.api_url,
+                venice.as_ref().and_then(|s| s.api_url.clone()),
+            );
+            merge(
+                &mut settings.venice.available_models,
+                venice.as_ref().and_then(|s| s.available_models.clone()),
             );
         }
 
