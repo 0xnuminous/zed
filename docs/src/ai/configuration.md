@@ -21,6 +21,8 @@ Here's an overview of the supported providers and tool call support:
 | [Ollama](#ollama)                               | ✅                                                                                                                                                                          |
 | [OpenAI](#openai)                               | ✅                                                                                                                                                                          |
 | [OpenRouter](#openrouter)                       | ✅                                                                                                                                                                          |
+| [Venice](#venice)                               | ✅
+
 | [OpenAI API Compatible](#openai-api-compatible) | 🚫                                                                                                                                                                          |
 
 ## Use Your Own Keys {#use-your-own-keys}
@@ -488,6 +490,25 @@ OpenRouter provides access to multiple AI models through a single API. It suppor
 The OpenRouter API key will be saved in your keychain.
 
 Zed will also use the `OPENROUTER_API_KEY` environment variable if it's defined.
+
+### Venice {#venice}
+
+> ✅ Supports tool use
+
+Venice exposes an OpenAI-compatible API.
+
+1. Visit [Venice](https://venice.ai) and create an account
+2. Generate an API key from your Venice dashboard
+3. Open the settings view (`agent: open configuration`) and go to the Venice section
+4. Enter your Venice API key
+
+The Venice API key will be saved in your keychain.
+
+Zed will also use the `VENICE_API_KEY` environment variable if it's defined.
+
+The default models are **Venice Auto** (fast) and **Venice Tool**. You can select
+either model in the assistant panel or specify additional models in your
+`settings.json` under `language_models.venice.available_models`.
 
 ## Advanced Configuration {#advanced-configuration}
 
